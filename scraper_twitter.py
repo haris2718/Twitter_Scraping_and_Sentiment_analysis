@@ -100,8 +100,8 @@ driver = webdriver.Firefox(service=service, options=options)
 xpi_path = r'C:\Users\haris\OneDrive\Desktop\scrap\ublock_origin-1.57.2.xpi'
 #rofile.add_extension(xpi_path)
 driver.install_addon(xpi_path, temporary=True)
-username="testihu139645"
-password="baris1234wh123456"
+username=""
+password=""
 query="Eurovision News"
 
 #τα id των tweet, max_tweets = πόσα tweet θα φέρει, empty_count μεταβλητη που χρησιμοποιείται για την ανάκτηση των tweet

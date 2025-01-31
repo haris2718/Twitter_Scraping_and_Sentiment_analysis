@@ -210,8 +210,8 @@ driver = webdriver.Firefox(service=service, options=options)
 xpi_path = r'C:\Users\haris\OneDrive\Desktop\scrap\ublock_origin-1.57.2.xpi'
 #rofile.add_extension(xpi_path)
 driver.install_addon(xpi_path, temporary=True)
-username="testihu139645"#βαλε το username του λογαριασμου
-password="baris1234wh123456"#βαλε το password
+username=""#βαλε το username του λογαριασμου
+password=""#βαλε το password
 query="Eurovision_advance_1_5_"#To ονομα του αρχείου (ένα μέρος τουλαχιστον)
 csv_to_scrape_comments=r'C:\Users\haris\OneDrive\Desktop\scrap\venv\splits\split_1_5.csv' #απο ποιο αρχείο θα πάρει τα post
 

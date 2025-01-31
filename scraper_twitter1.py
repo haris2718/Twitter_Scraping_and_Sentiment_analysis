@@ -81,8 +81,8 @@ driver = webdriver.Firefox(service=service, options=options)
 xpi_path = r'C:\Users\haris\OneDrive\Desktop\scrap\ublock_origin-1.57.2.xpi'  # Προσαρμόστε τη διαδρομή χωρίς διπλά backslashes
 #rofile.add_extension(xpi_path)
 driver.install_addon(xpi_path, temporary=True)
-username="testihu139645"
-password="gt5525wh123456"
+username=""
+password=""
 query="ClimateChangeUS"
 
 driver.get('https://twitter.com/i/flow/login')

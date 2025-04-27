@@ -1,69 +1,69 @@
-# 📊 Twitter Scraping και Ανάλυση Συναισθήματος για Ελλάδα και Ισραήλ στην  Eurovision 2024
+# Sentiment Analysis of Greece and Israel Tweets Related to Eurovision 2024
 
-Εισαγωγή
+Introduction
 
-Η παρούσα μελέτη έχει στόχο την ανάλυση του συναισθήματος (sentiment analysis) των tweets που σχετίζονται με την Ελλάδα και το Ισραήλ σε σχέση με τον διαγωνισμό τραγουδιού της Eurovision 2024. Για την ανάλυση χρησιμοποιήθηκε γλώσσα προγραμματισμού  Python και η βιβλιοθήκη TextBlob, ενώ τα δεδομένα αντλήθηκαν μέσω scraping από το Twitter και αποθηκεύτηκαν σε CSV αρχείο στο Google Drive.
+This study focuses on sentiment analysis of tweets related to Greece and Israel during the Eurovision Song Contest 2024. Data were collected through Twitter scraping, processed with Python and the TextBlob library, and stored in CSV format on Google Drive.
 
-Η επιλογή του Ισραήλ ως μία από τις δύο υπό μελέτη χώρες έγινε διότι εκείνη την περίοδο βρισκόταν στην επικαιρότητα λόγω της έναρξης της σύγκρουσης στη Γάζα και των πολύνεκρων επιθέσεων της Χαμάς στο Ισραήλ. Αυτά τα γεγονότα ενίσχυσαν τη δημόσια συζήτηση και προκάλεσαν έντονες συναισθηματικές αντιδράσεις στα κοινωνικά δίκτυα. Η συμπερίληψή του στη μελέτη στοχεύει στην αποτύπωση αυτής της συναισθηματικής διακύμανσης, πάντα με σεβασμό προς τη σοβαρότητα των γεγονότων.
+Israel was included in the analysis due to its heightened media presence following the outbreak of the Gaza conflict. The study aims to capture the emotional dynamics reflected on social media, with full acknowledgment of the seriousness of the events.
 
-## 🔍 Περιγραφή
+## Overview
 
-Το παρόν project αφορά τη συλλογή και αποθήκευση σχολίων από το Twitter γύρω από τη Eurovision 2024. Εστιάσαμε σε posts από 1 έως 15 Μαΐου 2024, τα οποία σχετίζονται με τα queries **"Eurovision"**, **"EBU"**, και hashtags όπως:  
-`#SBSEurovision`, `#fucktheEBU2024`, `#Eurovision2024`, `#eurovisiongr2024`, `#eurovissionfuns`.  
+This project focuses on the collection and sentiment analysis of Twitter data related to Eurovision 2024, with a specific emphasis on discussions involving Greece and Israel.
+Data was collected between May 1st and May 15th, 2024, and processed using Python and the TextBlob library for sentiment classification.
+Data Collection
+Keywords & Hashtags
 
-Αρχικά, έγινε χρήση του  του αρχείου **`advance_scraper.py`** για εντοπισμό σχετικών posts με τουλάχιστον 10 απαντήσεις. Το αποτέλεσμα ήταν το αρχείο `Advance2024-05-25_04-20-19_tweets_1-15.csv`, το οποίο περιείχε **1208 posts**.
+    "Eurovision", "EBU"
 
-Στη συνέχεια, τα URLs των posts μοιράστηκαν σε 5 csv αρχεία (για καλύτερη διαχείριση) και χρησιμοποιήθηκε το **`scraper_commends_from_post.py`** για τη συλλογή των απαντήσεων (tweets) κάθε post.
+    #SBSEurovision, #fucktheEBU2024, #Eurovision2024, #eurovisiongr2024, #eurovissionfuns
+
+Initially, the ```advance_scraper.py``` script was used to locate relevant posts with at least 10 replies. This process generated the file ```Advance2024-05-25_04-20-19_tweets_1-15.csv```, containing 1208 posts.
+
+Subsequently, the URLs of these posts were split into five CSV files for easier management. The ```scraper_comments_from_post.py``` script was then utilized to scrape the replies (tweets) associated with each post.
+
+
 
 ---
 
-## ⚙️ Προϋποθέσεις για Εκτέλεση
+## Prerequisites for Execution
 
-Ο χρήστης πρέπει:
+The user must:
 
-- Να έχει εγκατεστημένο τον **Firefox browser**.
-- Να κατεβάσει και εγκαταστήσει το [**geckodriver**](https://github.com/mozilla/geckodriver/releases) και να ορίσει σωστά την τοποθεσία του.
-- Να εγκαταστήσει το **uBlock Origin** για αποκλεισμό διαφημίσεων κατά την πλοήγηση:  
+- Have the **Firefox browser** installed.
+- Download and install **[geckodriver](https://github.com/mozilla/geckodriver/releases)** and properly configure its location.
+- Install **uBlock Origin** for blocking ads during navigation:  
   [uBlock Origin Add-on](https://addons.mozilla.org/en-US/firefox/addon/ublock-origin/)
-- Να έχει τα αρχεία `tweet.py` και `scroller.py` στον ίδιο φάκελο με τα κύρια scripts.
-- Ο χρήστης πρέπει να έχει λογαριασμό στο Twitter.
-- Πρέπει να εισάγει τα στοιχεία του (username/email και password) μέσα στον κώδικα, στα κατάλληλα σημεία των αρχείων **advance_scraper.py** και **scraper_commends_from_post.py**.
+- Have the files `tweet.py` and `scroller.py` in the same folder as the main scripts.
+- Have a Twitter account.
+- Insert their account details (username/email and password) in the appropriate sections of the **advance_scraper.py** and **scraper_comments_from_post.py** files.
 
 ---
 
-## 📁 Περιγραφή Αρχείων
+## File Description
 
-### ✅ `advance_scraper.py`
-Κάνει scrape τα αρχικά tweets με βάση την αναζήτηση:
+###  `advance_scraper.py`
+It finds the URLs of posts that have more than 10 tweets.
 
-1. **Αρχικοποίηση:** Εισαγωγή βιβλιοθηκών (`selenium`, `pandas`, `tweet.py`, `scroller.py`).
-2. **get_tweet_cards:** Συλλογή tweet καρτελών από τη σελίδα.
-3. **save_to_csv:** Αποθήκευση των tweets σε `.csv` αρχείο.
-4. **get_tweets:** Επιστρέφει τα συλλεγμένα tweets.
-5. **WebDriver:** Ρυθμίσεις για τον Firefox + geckodriver + uBlock.
-6. **Login:** Είσοδος στο Twitter με username & password.
-7. **Αναζήτηση:** Εισαγωγή ερωτήματος και ενεργοποίηση του Scroller.
-8. **Αποθήκευση:** Εξαγωγή των αποτελεσμάτων σε αρχείο CSV.
 
-### ✅ `scraper_commends_from_post.py`
-Διαβάζει τα URLs από τα αρχικά δεδομένα και κάνει scrape τα σχόλια κάθε post.
+### `scraper_commends_from_post.py`
+It reads the URLs from the initial data and scrapes the comments of each post.
 
-### ✅ `tweet.py`
-Συλλέγει δεδομένα (author, time, content) από κάθε tweet καρτέλα.
+###  `tweet.py`
+It collects data (author, time, content) from each tweet card.
 
-### ✅ `scroller.py`
-Χειρίζεται το scroll down της σελίδας ώστε να φορτωθούν νέα tweets.
+###  `scroller.py`
+It handles the page scroll down to load new tweets.
 
 ---
 
-### Μέρος Β
+### Part Β
 
-### Ανάλυση Συναισθήματος Tweets για Ελλάδα και Ισραήλ στο Eurovision 2024
+### Sentiment Analysis of Tweets for Greece and Israel in Eurovision 2024
 
 
-#### 1. Φόρτωση των Δεδομένων
+#### 1. Data Loading
 
-Χρησιμοποιήθηκε το Google Colab για την πρόσβαση στο Google Drive και την ανάγνωση του αρχείου `combined_unique_eurovision_valid.csv`. Στη συνέχεια δημιουργήθηκε μια λίστα από dictionaries που περιείχαν τα tweets και τα timestamps τους.
+Google Colab was used to access Google Drive and read the combined_unique_eurovision_valid.csv file. Then, a list of dictionaries was created containing the tweets and their timestamps.
 
 ```python
 from google.colab import drive
@@ -75,9 +75,9 @@ tweets = [{'Tweet': row['Content'], 'Timestamp': row['Timestamp']} for index, ro
 
 ---
 
-#### 2. Δημιουργία DataFrame και Καθαρισμός Δεδομένων
+#### 2. Creating the DataFrame and Cleaning the Data
 
-Τα tweets εισήχθησαν σε ένα DataFrame. Τα `NaN` αντικαταστάθηκαν με κενές συμβολοσειρές για αποφυγή σφαλμάτων.
+The tweets were imported into a DataFrame. ```NaN``` values were replaced with empty strings to prevent errors.
 
 ```python
 df = pd.DataFrame.from_dict(tweets)
@@ -86,15 +86,15 @@ df['Tweet'] = df['Tweet'].fillna('')
 
 ---
 
-#### 3. Ορισμός Λέξεων-Κλειδιών
+#### 3. Defining Keywords
 
-Δημιουργήθηκαν δύο λίστες με λέξεις-κλειδιά που σχετίζονται με την Ελλάδα και το Ισραήλ (όπως "Athens", "Greek culture" και "Tel Aviv", "Gaza" κλπ). Αυτές οι λίστες χρησιμοποιήθηκαν για να επισημάνουμε αν ένα tweet αναφέρεται σε κάποια από τις δύο χώρες.
+Two lists of keywords related to Greece and Israel (such as "Athens," "Greek culture," "Tel Aviv," "Gaza," etc.) were created. These lists were used to identify whether a tweet referred to either of the two countries.
 
 ---
 
-#### 4. Αναγνώριση Θεματολογίας
+#### 4. Topic Identification
 
-Ορίστηκε συνάρτηση `identify_subject()` για να ελέγξει εάν ένα tweet περιέχει κάποια από τις λέξεις-κλειδιά.
+A function named ```identify_subject()``` was defined to check if a tweet contains any of the specified keywords.
 
 ```python
 def identify_subject(tweet, refs):
@@ -110,10 +110,9 @@ df['Greece'] = df['Tweet'].apply(lambda x: identify_subject(x, Greece_handle))
 
 ---
 
-#### 5. Ανάλυση Συναισθήματος με TextBlob
+#### 5. Sentiment Analysis with TextBlob
 
-Για κάθε tweet, υπολογίστηκε η πολικότητα (sentiment polarity) με χρήση της βιβλιοθήκης TextBlob. Η πολικότητα κυμαίνεται από -1 (αρνητικό συναίσθημα) έως +1 (θετικό συναίσθημα).
-
+For each tweet, the sentiment polarity was calculated using the TextBlob library. Polarity values range from -1 (negative sentiment) to +1 (positive sentiment).
 ```python
 from textblob import TextBlob
 df['polarity'] = df['Tweet'].apply(lambda x: TextBlob(x).sentiment.polarity)
@@ -121,9 +120,9 @@ df['polarity'] = df['Tweet'].apply(lambda x: TextBlob(x).sentiment.polarity)
 
 ---
 
-#### 6. Μετατροπή Timestamps και Ομαδοποίηση Κατά Ημερομηνία
+#### 6. Timestamp Conversion and Grouping by Date
 
-Τα timestamps μετατράπηκαν σε τύπο ημερομηνίας και δημιουργήθηκε νέα στήλη με ημερομηνίες. Φιλτράραμε tweets από την 1η Μαΐου 2024 και έπειτα.
+Timestamps were converted into date format, and a new column with the corresponding dates was created. Tweets were then filtered to include only those from May 1, 2024, onwards.
 
 ```python
 df['Timestamp'] = pd.to_datetime(df['Timestamp'])
@@ -134,13 +133,13 @@ df = df[df['Date'] >= start_date]
 
 ---
 
-#### 7. Υπολογισμός Ημερήσιας Πολικότητας & Κινητού Μέσου Όρου
+#### 7. Daily Sentiment Calculation & Rolling Average
 
-Για κάθε χώρα:
-- Φιλτράρονται τα tweets που την αφορούν.
-- Ομαδοποιούνται κατά ημερομηνία.
-- Υπολογίζεται ο μέσος όρος της πολικότητας ανά ημέρα.
-- Υπολογίζεται και κινητός μέσος όρος (rolling mean) με παράθυρο 3 ημερών.
+For each country:
+  - Tweets related to the country were filtered.
+  - Tweets were grouped by date.
+  - The daily average sentiment polarity was calculated.
+  - A rolling mean (with a 3-day window) was also computed.
 
 ```python
 Greece = df[df['Greece']==1][['Date', 'polarity']].groupby('Date').mean().reset_index()
@@ -158,9 +157,10 @@ Israel['MA Polarity'] = Israel.polarity.rolling(3, min_periods=1).mean()
  </p>
 ---
 
-#### 8. Οπτικοποίηση Αποτελεσμάτων
+#### 8. Visualization of Results
 
-Δημιουργήθηκε γράφημα γραμμής όπου αποτυπώνεται η πορεία του μέσου όρου πολικότητας ανά ημέρα και η μεταβολή του στο χρόνο.
+A line chart was created to show the trend of the average daily sentiment polarity and its variation over time.
+
 
 ```python
 plt.plot(Greece['Date'], Greece['MA Polarity'], label='Greece MA Polarity', color='blue')
@@ -178,68 +178,72 @@ plt.show()
 
 ---
 
-#### Συμπεράσματα
+#### Conclusions
 
-Από την παραπάνω ανάλυση είναι δυνατή η παρακολούθηση της συναισθηματικής αντίδρασης του κοινού στα γεγονότα που αφορούν τις δύο χώρες κατά τη διάρκεια του διαγωνισμού. Η μεθοδολογία αυτή μπορεί να επεκταθεί για περισσότερες χώρες ή περιόδους, και να ενσωματώσει advanced NLP τεχνικές για πιο ακριβή κατανόηση των συναισθημάτων.
+From the above analysis, it is possible to track the public’s emotional reaction to events related to the two countries during the competition.
+This methodology can be extended to include more countries or time periods and can incorporate advanced NLP techniques for a more accurate understanding of sentiment.
 
-# 📊 Ανάλυση Συναισθηματικού Κλίματος (1 Μαΐου – 26 Μαΐου 2024)
+# Sentiment Dynamics Analysis (May 1st – May 26th, 2024)
+
 
 <p align="left">
   <img src="assets/sentiment_analysis.png" width="100%" hspace="10" />  
  </p>
 
-Το γράφημα απεικονίζει την εξέλιξη της κινητής μέσης τιμής της συναισθηματικής πολικότητας (sentiment polarity) για την **Ελλάδα** και το **Ισραήλ**, από την 1η έως και την 26η Μαΐου 2024, αναδεικνύοντας τάσεις και μεταβολές στο δημόσιο συναίσθημα μέσα από τα δεδομένα της περιόδου.
 
-Παρακάτω παρατίθενται τα κύρια γεγονότα που σημειώθηκαν σε αυτή την περίοδο, με συσχέτιση στις μεταβολές του συναισθηματικού κλίματος.
+This figure presents the progression of the 3-day moving average of sentiment polarity for Greece and Israel throughout the period from May 1st to May 26th, 2024, capturing trends and fluctuations in public emotional response as reflected through Twitter data.
+
+Subsequently, major events that occurred within this timeframe are outlined, offering context to the observed variations in sentiment.
 
 ---
 
-## 🇬🇷 Ελλάδα – Σημαντικά Γεγονότα και Ανάλυση
+## 🇬🇷 Greece – Key Events and Analysis
 
-| Ημερομηνία | Γεγονός | Σύνδεσμος | Συσχέτιση με γράφημα |
+| Date | Event | Link | Correlation with Graph |
 |-----------|---------|-----------|------------------------|
-| **06/05** | [Ανακοινώσεις για τη Μαρίνα Σάττι (Eurovision)](https://www.radiotimes.com/tv/entertainment/marina-satti-greece-eurovision-2024-profile-age-instagram/) | 📎 | Ανοδική τάση θετικής πολικότητας. |
-| **07/05** | [Α' Ημιτελικός Eurovision ](https://program.ert.gr/details.asp?pid=3953653&chid=9) | 📎 | Κορύφωση θετικής πολικότητας (~0.14). |
-| **09/05** | [Β' Ημιτελικός Eurovision – Συμμετοχή Ελλάδας](https://press.ert.gr/grafeio-typou-ert/eurovision-2024-me-tin-ellada-kai-ti-marina-satti-ston-v-imiteliko-pempti-9-ma-oy-2024-stis-22-00/) | 📎 | Σταδιακή κάμψη. |
-| **10/05** | [Viral αντίδραση της Σάττι σε Ισραηλινή εκπρόσωπο](https://www.enikos.gr/media/eurovision-2024-marina-satti-oi-gkrimatses-to-chasmourito-kai-o-ypnos-tin-ora-pou-milouse-i-ekprosopos-tou-israil/2155051/) | 📎 | Άνοδος της θετικής πολικότητας. |
-| **11/05** | [Τελικός Eurovision – Συμμετοχή Ελλάδας κατέκτησε την 11η θέση](https://www.protothema.gr/life-style/article/1496616/eurovision-2024-megalos-telikos-apotelesmata/) | 📎 | Πτώση της θετικής πολικότητας. |
-| **12/05** | [Αντιδράσεις στους χορευτές της Μαρίνας Σάττι](https://www.protothema.gr/life-style/article/1496813/eurovision-suggnomi-zitoun-oi-horeutes-tis-marinas-satti-meta-tis-adidraseis-gia-ti-dilosi-tous-gia-tin-tourkia/) | 📎 | Μεγάλη πτώση της θετικής τάσης. |
-| **Μετά τις 16/05** | — | — | Σταδιακή κάμψη / στασιμότητα στην πολικότητα. |
+| **06/05** | [Announcements about Marina Satti (Eurovision)](https://www.radiotimes.com/tv/entertainment/marina-satti-greece-eurovision-2024-profile-age-instagram/) | 📎 | Upward trend in positive sentiment polarity. |
+| **07/05** | [	Eurovision Semi-final A ](https://program.ert.gr/details.asp?pid=3953653&chid=9) | 📎 | 	Peak in positive sentiment polarity (~0.14). |
+| **09/05** | [	Eurovision Semi-final B – Greece’s participation](https://press.ert.gr/grafeio-typou-ert/eurovision-2024-me-tin-ellada-kai-ti-marina-satti-ston-v-imiteliko-pempti-9-ma-oy-2024-stis-22-00/) | 📎 | 	Gradual decline. |
+| **10/05** | [	Viral reaction of Satti to Israeli representative](https://www.enikos.gr/media/eurovision-2024-marina-satti-oi-gkrimatses-to-chasmourito-kai-o-ypnos-tin-ora-pou-milouse-i-ekprosopos-tou-israil/2155051/) | 📎 | Increase in positive sentiment polarity. |
+| **11/05** | [Eurovision Final – Greece finished 11th](https://www.protothema.gr/life-style/article/1496616/eurovision-2024-megalos-telikos-apotelesmata/) | 📎 |Drop in positive sentiment polarity. |
+| **12/05** | [Reactions to Marina Satti’s dancers](https://www.protothema.gr/life-style/article/1496813/eurovision-suggnomi-zitoun-oi-horeutes-tis-marinas-satti-meta-tis-adidraseis-gia-ti-dilosi-tous-gia-tin-tourkia/) | 📎 | Significant drop in positive sentiment. |
+| **After 16/05** | — | — | Gradual decline / stagnation in sentiment polarity. |
 
 ---
 
-## 🇮🇱 Ισραήλ – Σημαντικά Γεγονότα και Ανάλυση
+## 🇮🇱 Israel – Key Events and Analysis
 
-| Ημερομηνία | Γεγονός | Σύνδεσμος | Συσχέτιση με γράφημα |
+| Date | Event | Link | Correlation with Graph |
 |-----------|---------|-----------|------------------------|
-| **06/05** | [Ισραηλινή εισβολή στη Ράφα](https://www.cnn.gr/kosmos/story/418037/rafa-me-to-daxtylo-sti-skandali-to-israil-nea-eksodos-xiliadon-amaxon) | 📎 | Μικρή πτώση ή στασιμότητα στην πολικότητα. |
-| **13/05** | [Memorial Day – Πατριωτικά αισθήματα](https://www.timesofisrael.com/liveblog_entry/israels-ny-consul-at-memorial-day-event-every-single-household-knows-a-victim/) | 📎 | Μικρή άνοδος λόγω συλλογικού αισθήματος. |
-| **17/05** | [Ανάκτηση σωρών 3 ομήρων από IDF](https://www.bankingnews.gr/index.php?id=738200) / [Israel Hayom](https://www.israelhayom.com/2024/05/17/israeli-forces-recover-bodies-of-3-captives-in-daring-gaza-raid/) | 📎 | Αισθητή άνοδος στην πολικότητα (συγκίνηση – εθνική ενότητα). |
-| **20/05** | [Πτώση ελικοπτέρου προέδρου Ιράν  Ραϊσί – Ισραηλινή δήλωση](https://www.ieidiseis.gr/kosmos/247461/israil-den-riksame-emeis-to-elikoptero-oyte-dakry-gia-ton-raisi) | 📎 | Αισθητή πτώση στην πολικότητα. |
-| **24/05** | [Ανάκτηση άλλων 3 σωρών ομήρων](https://www.bbc.com/news/articles/cjrr9wqjnveo) | 📎 | Νέα άνοδος στην πολικότητα – έντονη συγκίνηση. |
+| **06/05** | [Israeli invasion of Rafah	](https://www.cnn.gr/kosmos/story/418037/rafa-me-to-daxtylo-sti-skandali-to-israil-nea-eksodos-xiliadon-amaxon) | 📎 |Small drop or stagnation in sentiment polarity.  |
+| **13/05** | [Memorial Day ](https://www.timesofisrael.com/liveblog_entry/israels-ny-consul-at-memorial-day-event-every-single-household-knows-a-victim/) | 📎 | Small increase due to collective sentiment. |
+| **17/05** | [Recovery of 3 hostages by IDF](https://www.bankingnews.gr/index.php?id=738200) / [Israel Hayom](https://www.israelhayom.com/2024/05/17/israeli-forces-recover-bodies-of-3-captives-in-daring-gaza-raid/) | 📎 | Noticeable rise in sentiment polarity (emotion – national unity). |
+| **20/05** | [Helicopter crash of Iranian President Raisi – Israeli statement	](https://www.ieidiseis.gr/kosmos/247461/israil-den-riksame-emeis-to-elikoptero-oyte-dakry-gia-ton-raisi) | 📎 | Noticeable drop in sentiment polarity. |
+| **24/05** | [Recovery of another 3 hostages ](https://www.bbc.com/news/articles/cjrr9wqjnveo) | 📎 | New rise in sentiment polarity – intense emotion. |
 
 ---
 
-## 📌 Συμπεράσματα
+## 📌 Conclusions
 
-- Η **Ελλάδα** εμφάνισε κορύφωση θετικού συναισθήματος στις 6–7 Μαΐου λόγω της Eurovision. Ακολούθησε κάμψη εξαιτίας αρνητικών αντιδράσεων στα παραλειπόμενα.
-- Το **Ισραήλ** παρουσίασε **αντιφατικές τάσεις**: αρνητικά γεγονότα με πτώση πολικότητας (Ράφα, πόλεμος , πτώση ελικοπτέρου) συνέπεσαν με **αισθητή άνοδο** της πολικότητας σε ημερομηνίες όπου ανακοινώθηκε η ανάκτηση ομήρων (17 & 24 Μαΐου), πιθανόν λόγω **πατριωτικής υπερηφάνειας** και **ανακούφισης**.
-- Το γράφημα αντικατοπτρίζει την **πολιτισμική επιρροή** στην περίπτωση της Ελλάδας και τη **συναισθηματική ένταση λόγω πολέμου** στην περίπτωση του Ισραήλ.
-
-
+- **Greece** showed a peak in **positive sentiment on May 6-7** due to Eurovision. This was followed by a **decline** due to negative reactions to the aftermath.
+- **Israel** exhibited contradictory trends: negative events such as the **Rafah invasion, war, and helicopter crash caused a drop** in sentiment polarity, while a **significant rise was observed on dates when the recovery of hostages was announced** (May 17 & 24), likely due to patriotic pride and relief.
+- The graph reflects the cultural influence in Greece’s case and the emotional intensity due to war in Israel’s case.
 
 
 
 
-## ❗ Προβλήματα & Λύσεις
 
-- 🔸 Τα προβλήματα που προκαλούσαν οι διαφημίσεις   στο scraping  επιλύθηκαν με χρήση του **uBlock**.
-- 🔸 Το Twitter, ως **δυναμική σελίδα**, απαίτησε scrolling μέσω του `scroller.py`.
+
+## Problems & Solutions
+
+- Issues caused by ads during scraping were resolved by using uBlock. **uBlock**.
+-  Twitter, being a **dynamic page**, required scrolling through the scroller.py. `scroller.py`.
 
 ---
 
-## 📦 Αποτελέσματα
+## Results
 
-- Συλλέχθηκαν 1208 post και 32.134 μοναδικα  tweets.
-- Μετά το scraping των απαντήσεων, δημιουργήθηκε ένα σύνολο δεδομένων ιδανικό για **ανάλυση συναισθήματος**
+- 1208 posts and 32,134 unique tweets were collected.
+- After scraping the replies, a dataset ideal for **sentiment analysis** was created.
+
 
